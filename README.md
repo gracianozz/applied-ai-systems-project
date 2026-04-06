@@ -17,6 +17,31 @@ Replace this paragraph with your own summary of what your version does.
 
 ## How The System Works
 
+
+- Real-World Recommendations work by obtaining information on behavior and actions from the user. Things like what you have watched or listened to, how long you have stayed and listened or watched something, what you skipped, what you have replayed, etc. They use different rules and algorithms to sort and fit certain songs into categories, and then the recommendation is displayed from there. These types of systems also work by using numbers and equations and from there determine whether something is similar or different from the result. The features that I have chosen that my song and user profile objects will use in my simulation are genre, mood, energy, and tempo(beats per minute).
+
+![OutputPictureExample](image.png)
+
+
+## Algorithm Recipe
+- The overall layout towards the point system is as follows:
+1. Genre: 3
+2. Mood : 2.5
+3. Energy : 2.5
+4. Tempo_bpm : 2
+- Each of these numbers add up to 10, or 100% using percentage.
+
+- This is the point system towards each of my chosen features. First off, genre and mood will be "on" and "off" based. For example: A system will score 3 points for genre if the genre matches the input, otherwise it will be 0.
+- As for the energy and tempo features, those will be point based. 
+
+- Using the formula  e_n = 1-|e_s - e_t|, where e_s is the current song's energy value, and e_t is the user target's energy, this will calculate the closeness from 0-1. Finally you multiply that number by 2.5 to determine the overall points obtained and added to the energy feature.
+
+- Using the formula t_n = (t-t_min)/(t_max-t_min), this will normalize the tempo from 0-1 for both the song being scored and the user's input. Finally, using the formula closeness_tempo = 1 - |t_{s,n} - t_{t,n}| , where t_{s,n} is the normalized tempo of the song being scored, and t_{t,n} is the normalized target tempo from user input, this calculates the closeness from 0-1, which is then multiplied by 2.5 to determine the points obtained and added to the energy feature.
+
+- In summary, using these equations and algorithms, this compares each song to the song inputted and decides whether or not it is similar and should be recommended or not
+
+
+
 Explain your design in plain language.
 
 Some prompts to answer:
