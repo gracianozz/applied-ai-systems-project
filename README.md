@@ -41,6 +41,14 @@ Replace this paragraph with your own summary of what your version does.
 - In summary, using these equations and algorithms, this compares each song to the song inputted and decides whether or not it is similar and should be recommended or not
 
 
+## Stress Test Cases
+
+![Sad Mood/High Energy](test1.png)
+![Chill Mood/ High Energy](test2.png)
+![Unknown Genre and Mood](test3.png)
+![Numeric Testing Only](test4.png)
+![Gener and Mood Only](test5.png)
+
 
 Explain your design in plain language.
 

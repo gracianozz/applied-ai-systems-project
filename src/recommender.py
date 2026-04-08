@@ -97,9 +97,9 @@ def score_song(song: Dict, user_prefs: Dict, tempo_min: float, tempo_max: float)
     Required by src/main.py
     """
     # Scoring weights (sum to 10)
-    GENRE_WEIGHT = 3.0
+    GENRE_WEIGHT = 1.5 #Half the importance, originally 3.0
     MOOD_WEIGHT = 2.5
-    ENERGY_WEIGHT = 2.5
+    ENERGY_WEIGHT = 5.0 #Doubled the importance, originally 2.5
     TEMPO_WEIGHT = 2.0
 
     target_genre = str(user_prefs.get("genre", "")).lower().strip()

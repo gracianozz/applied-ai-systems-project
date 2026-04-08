@@ -2,110 +2,77 @@
 
 ## 1. Model Name  
 
-Give your model a short, descriptive name.  
-Example: **VibeFinder 1.0**  
-
+Name: AudioFinder 1.0
 ---
 
 ## 2. Intended Use  
 
-Describe what your recommender is designed to do and who it is for. 
 
-Prompts:  
-
-- What kind of recommendations does it generate  
-- What assumptions does it make about the user  
-- Is this for real users or classroom exploration  
+- The recommender is designed to recommend 5 songs that a user will like and enjoy based on the genre, mood, energy, and tempo inputted by the user. It will predict songs close or related to the user's inputs. Thi system is meant for users trying to find new songs they want to listen to based on what they already listen to currently.
 
 ---
 
 ## 3. How the Model Works  
 
-Explain your scoring approach in simple language.  
 
-Prompts:  
-
-- What features of each song are used (genre, energy, mood, etc.)  
-- What user preferences are considered  
-- How does the model turn those into a score  
-- What changes did you make from the starter logic  
-
-Avoid code here. Pretend you are explaining the idea to a friend who does not program.
+- The program works by first taking input the 4 features I chose, which are genre, mood, energy, and tempo. Each feature is worth a certain amount of points, and some features can be worth more than others, depending on what the user inputs. This model turns the user input into a score by comparing each song in the songs.csv file to the user input. With Genre and Mood, it checks if a song in the file matches the user input, then awards points based on the result. Then, with energy and tempo, those are calculated numerically. Both are calculated on a 0-1 scale, and then multiplied by the amount worth of each feature. Finally, all those points are added up, and the top 5 songs with the highest final scores are displayed as recommended. 
 
 ---
 
 ## 4. Data  
+  
 
-Describe the dataset the model uses.  
-
-Prompts:  
-
-- How many songs are in the catalog  
-- What genres or moods are represented  
-- Did you add or remove data  
-- Are there parts of musical taste missing in the dataset  
+- There is a total of 15 songs in the catalog. Some genres that are represented are pop, lofi, rock, and intense. I added 5 songs so there could be a bigger range of songs to choose from, with more genres as well. The data set is still missing other genres and moods, which can help with the recommending and not overprioritizing of genres.
 
 ---
 
 ## 5. Strengths  
 
-Where does your system seem to work well  
 
-Prompts:  
-
-- User types for which it gives reasonable results  
-- Any patterns you think your scoring captures correctly  
-- Cases where the recommendations matched your intuition  
-
+- User types for which the system gives reasonable results are users who prefer pop genre with a happy mood. The scoring correctly captures reasonable energy and tempo inputs, and have matched my intuition when inputting different user profiles. 
 ---
 
 ## 6. Limitations and Bias 
 
-Where the system struggles or behaves unfairly. 
-
-Prompts:  
-
-- Features it does not consider  
-- Genres or moods that are underrepresented  
-- Cases where the system overfits to one preference  
-- Ways the scoring might unintentionally favor some users  
-
----
+- One weakness that was discovered during the testing process is that since the change of doubling the energy, although it was much more accurate on the recommendations, it can hurt users with mixed taste. Users that have mutliple genre/moods with the same energy level can be recommended very specific songs mutliple times, instead of more of a range of songs. This can lead to repeated songs being recommended overall.
 
 ## 7. Evaluation  
 
-How you checked whether the recommender behaved as expected. 
 
-Prompts:  
+- The way I checked whether the recommender behaved as expected was looking through the logic and math functionality when inputing user profiles. I double checked the math to ensure no logic errors and that the system properly displayed the correct information.
 
-- Which user profiles you tested  
-- What you looked for in the recommendations  
-- What surprised you  
-- Any simple tests or comparisons you ran  
 
-No need for numeric metrics unless you created some.
+- Some user profiles I tested were:
+1. Listeners who like upbeat songs
+-  Pop,happy, high energy, and high tempo
+
+2. - Listeners who prefer pop songs that are energetic but feel smoother
+- Pop, chill, high energy, steady tempo
+
+
+3. - Listeners who enjoy futuristic, experimental pop sounds
+Hyperpop,euphoric, energy higher than average, and high tempo 
+
+4. - Listeners who choose depend mostly on how fast or energetic a song is
+Purely energy and tempo based (No genre or mood inserted)
+
+
+5. - Listeners who mainly care about genre and mood
+Purely Genre and Mood based (NO energy or tempo inserted)
+
 
 ---
 
 ## 8. Future Work  
 
-Ideas for how you would improve the model next.  
 
-Prompts:  
-
-- Additional features or preferences  
-- Better ways to explain recommendations  
-- Improving diversity among the top results  
-- Handling more complex user tastes  
-
+- An additional feature I would add to improve the system is out of range tempo and energy. Inputting numbers like 0 in range and energy make it so there are logic errors in the process and output. Having set the actual range will help. 
+- Also, adding much more songs to the songs.csv file will help much more in keeping all genres and moods fair to be chosen. 
 ---
 
 ## 9. Personal Reflection  
+ 
 
-A few sentences about your experience.  
-
-Prompts:  
-
-- What you learned about recommender systems  
-- Something unexpected or interesting you discovered  
-- How this changed the way you think about music recommendation apps  
+- I learned that recommender systems have 2 different ways of working, which is collaborative filtering and user-based filtering.
+- Something interesting I discovered is how math and numeric calculations are used to best show the score and similarness of different songs.
+- This changed the way I think about music recommendation apps by showing how there is much more math and logic to implement to have a fully functional system with no random recommendations and errors.
