@@ -1,0 +1,12 @@
+2026-04-23 14:29:38.105 No ASGI app assignments found in C:\Users\graci\Downloads\AI110 Final Project\applied-ai-systems-project\src\app.py
+2026-04-23 14:29:38.287 Filtered 77 packages down to 1 candidates for component scanning
+2026-04-23 14:29:38.288 Scanning 1 candidate packages for component manifests using 1 worker threads
+2026-04-23 14:29:38.337 Found 0 component manifests total
+2026-04-23 14:29:38.339 No asset roots to watch
+2026-04-23 14:29:38.340 File watching not started
+2026-04-23 14:29:38.340 Starting new event loop for server
+2026-04-23 14:29:38.342 Starting server...
+2026-04-23 14:29:38.343 Serving static content from C:\Users\graci\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\streamlit\static
+2026-04-23 14:29:38.350 Server started on port 8515
+2026-04-23 14:29:38.352 Runtime state: RuntimeState.INITIAL -> RuntimeState.NO_SESSIONS_CONNECTED
+2026-04-23 14:29:38.608 Setting up signal handler

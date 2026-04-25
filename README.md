@@ -1,244 +1,58 @@
-# 🎵 Music Recommender Simulation
+## Original Project
+- The name of the original project from which this new project was extended is called the Music Recommender Simulator. Its original goals were to recommend songs based on word and numeric input from the user. The system recommended songs based on mathematical similarity with the numeric inputs, as well as keyword similarity.
 
-## Project Summary
 
-In this project you will build and explain a small music recommender system.
+## More about the extended project -Title & Summary
+- The extended project name is AMPED, an AI DJ that will recommend you songs. The overall goal towards this project was to make it so instead of numeric values being inputted, since realistically most users dont search songs based on a point scale of features like for example: energy, a user can type in actual prompts, and sentences, from which the program can work with to determine what songs to display and recommend. Using RAG as well as the LLM Gemini, the program will help correctly display and describe proper songs that match what the user is looking for. Having new features like these combined with a beginner friendly User Interface will help in user more user attraction and motivation to want to use the program.
 
-Your goal is to:
 
-- Represent songs and a user "taste profile" as data
-- Design a scoring rule that turns that data into recommendations
-- Evaluate what your system gets right and wrong
-- Reflect on how this mirrors real world AI recommenders
+## System Diagram Representation
+![FlowChart](assets/SystemDiagram.png)
 
-Replace this paragraph with your own summary of what your version does.
+- The system diagram represents the overall flow and process of input by the user. Starting with the streamlit UI, the user has two modes from which they can pick, describe mode: they write a short query describing the music, or artist mode: typing an specific artist from which songs will be recommended. After user inputs a prompt or artist name, the retreival happens. In describe mode, each token is passed to find any key words or synonyms to properly look for in the song database. In artist mode, songs with the exact artist name are looked for. The program uses a point system for the describe mode, as well as bonus-points that can be earned when more tokens are matched. After retreival, the system gathers the top-k songs(up to 5) which most describe what the user is looking for. In order to fully check whether songs retreived are accurate, guardrails are in place to double-check similarity of the songs retrieved. When the songs are checked and confirmed, they are sent to the Gemini with a prompt to display the songs and explain why they are recommended.
 
----
 
-## How The System Works
+## Setup instructions
 
+- In order to run the code, ensure the requirements.txt file is installed.
+- Enter "pip install -r requirements.txt" in the terminal to install features used in the program.
+- In order for this program to function with Gemini, create your own API key by using the Google AI Studio. You can follow the link at https://aistudio.google.com.
+- After creating an API key, copy it and paste it onto the placeholder in the .env file.
 
-- Real-World Recommendations work by obtaining information on behavior and actions from the user. Things like what you have watched or listened to, how long you have stayed and listened or watched something, what you skipped, what you have replayed, etc. They use different rules and algorithms to sort and fit certain songs into categories, and then the recommendation is displayed from there. These types of systems also work by using numbers and equations and from there determine whether something is similar or different from the result. The features that I have chosen that my song and user profile objects will use in my simulation are genre, mood, energy, and tempo(beats per minute).
+- Shortly after, ensure in the terminal you are in the correct folder to run the program. The folder is called "applied-ai-systems-project".
 
-![OutputPictureExample](image.png)
+- Once in the correct folder, run the program with "python -m streamlit run src/app.py".
+- A window should open and the UI should display. Now you can begin use.
 
 
-## Algorithm Recipe
-- The overall layout towards the point system is as follows:
-1. Genre: 3
-2. Mood : 2.5
-3. Energy : 2.5
-4. Tempo_bpm : 2
-- Each of these numbers add up to 10, or 100% using percentage.
+## Sample Interactions
+- Here are some example inputs to show the program's AI outputs & to demonstrate the system is functional.
 
-- This is the point system towards each of my chosen features. First off, genre and mood will be "on" and "off" based. For example: A system will score 3 points for genre if the genre matches the input, otherwise it will be 0.
-- As for the energy and tempo features, those will be point based. 
+![Example 1: "Something relaxing for studying"](assets/Example1.png)
+![Example 2: "Something upbeat for my workout"](assets/Example2.png)
+![Example 3: Artist Specific: "Peso Pluma"](assets/Example3.png)
 
-- Using the formula  e_n = 1-|e_s - e_t|, where e_s is the current song's energy value, and e_t is the user target's energy, this will calculate the closeness from 0-1. Finally you multiply that number by 2.5 to determine the overall points obtained and added to the energy feature.
+## Test Cases
+There are pytests conducted in tests/test_rag.py to ensure program features like proper retrieval of songs, guardrails when little to no songs are returned, and proper synonym connection are passed. This helps ensure the overall functionality of the program. There are a total of 9 pytests.
 
-- Using the formula t_n = (t-t_min)/(t_max-t_min), this will normalize the tempo from 0-1 for both the song being scored and the user's input. Finally, using the formula closeness_tempo = 1 - |t_{s,n} - t_{t,n}| , where t_{s,n} is the normalized tempo of the song being scored, and t_{t,n} is the normalized target tempo from user input, this calculates the closeness from 0-1, which is then multiplied by 2.5 to determine the points obtained and added to the energy feature.
 
-- In summary, using these equations and algorithms, this compares each song to the song inputted and decides whether or not it is similar and should be recommended or not
+## Design Decisions
+- The reason for this specific build was to try to get the most "exact" results out of the retrieval. Using more of a rule-based approach for retrieval, this made it finding exact keywords from the query were the most important. After the exact keyword search, other features like synonyms of keywords were searched for as well, to ensure no missing or mistakes can be made when retrieving the information, and to have more accurate results. Some trade-offs I made were to not display ALL of the songs that were correctly matched and retrieved from the retrieval process, in order for the program to recommend results faster. I noticed that overall, up to 5 top songs that were displayed was a good standpoint to be in.
 
 
-## Stress Test Cases
+## Testing Summary 
+- The finalized result was a proper AI based recommendation system! The program works as intended and therefore successfully recommend music based on the mode chosen. Although the program worked sucessfully, it has a harder time dealing with more complex queries, like non-common features that a person may like. This is due to the fact that since the program has more of a rule-based approach for retrieval, which is the key part in what to recommend, it may not recognize what could be synonyms when comparing tokens. In conclusion, I learned the true process and the core of a RAG system, and its already given me ideas for other projects too! I'd love to use RAG more in future projects when the chance is available. With the knowledege I've aquired from doing this project, I'm sure I would be able to make my next RAG system more accurate.
 
-![Sad Mood/High Energy](test1.png)
-![Chill Mood/ High Energy](test2.png)
-![Unknown Genre and Mood](test3.png)
-![Numeric Testing Only](test4.png)
-![Gener and Mood Only](test5.png)
 
+## Post-Project Reflection, Ethics
+- One limitation is that when in artist mode, it is harder to recommend proper songs if something like misspelling happens. This goes the same with complex descriptions inputted to by the user, as talked about before. This is due to the fact that the search and retrieval uses more of a rule-based approach, which can limit non-common queries when inputted. A way the AI can be missued could be prompt abuse in general, since the query typed in is also sent to the LLM. This could be prevented by bettering the prompt rules, as well as rules towards the LLM when sending the query to ensure security and proper output. 
 
-Explain your design in plain language.
+- One thing that did surprise me when testing the AI reliability was the difference in song recommendations with the change of ONE word. For example, the difference between the results of "chill study" vs. "calm study". The AI can still produce accurate results, but the song choices can be different. It made me think about how the process behind the overall retrieval system works and how Gemini displays them.
 
-Some prompts to answer:
+- One collaboration I made in this project was when working towards building a UI for the program. Since I am not that familiar with streamlit, I asked Copilot to help with the proper syntax structure, as well as to give me ideas on how the UI could best be made. Copilot gave me helpful information and helped build the finalized UI the user sees when running the program.
 
-- What features does each `Song` use in your system
-  - For example: genre, mood, energy, tempo
-- What information does your `UserProfile` store
-- How does your `Recommender` compute a score for each song
-- How do you choose which songs to recommend
+- An instance where Copilot gave me incorrect information was when building the proper prompt for Gemini to respond with. The AI was recommending the prompt to include ALL top k songs, without regarding if ALL songs were a strong match towards the query. This made the AI return songs, but then statements like "There is not enough context to display recommendations". This would make users confused, so that needed to be changed. 
 
-You can include a simple diagram or bullet list if helpful.
 
----
-
-## Getting Started
-
-### Setup
-
-1. Create a virtual environment (optional but recommended):
-
-   ```bash
-   python -m venv .venv
-   source .venv/bin/activate      # Mac or Linux
-   .venv\Scripts\activate         # Windows
-
-2. Install dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
-3. Run the app:
-
-```bash
-python -m src.main
-```
-
-### Running Tests
-
-Run the starter tests with:
-
-```bash
-pytest
-```
-
-You can add more tests in `tests/test_recommender.py`.
-
----
-
-## Experiments You Tried
-
-Use this section to document the experiments you ran. For example:
-
-- What happened when you changed the weight on genre from 2.0 to 0.5
-- What happened when you added tempo or valence to the score
-- How did your system behave for different types of users
-
----
-
-## Limitations and Risks
-
-Summarize some limitations of your recommender.
-
-Examples:
-
-- It only works on a tiny catalog
-- It does not understand lyrics or language
-- It might over favor one genre or mood
-
-You will go deeper on this in your model card.
-
----
-
-## Reflection
-
-Read and complete `model_card.md`:
-
-[**Model Card**](model_card.md)
-
-Write 1 to 2 paragraphs here about what you learned:
-
-- about how recommenders turn data into predictions
-- about where bias or unfairness could show up in systems like this
-
-
----
-
-## 7. `model_card_template.md`
-
-Combines reflection and model card framing from the Module 3 guidance. :contentReference[oaicite:2]{index=2}  
-
-```markdown
-# 🎧 Model Card - Music Recommender Simulation
-
-## 1. Model Name
-
-Give your recommender a name, for example:
-
-> VibeFinder 1.0
-
----
-
-## 2. Intended Use
-
-- What is this system trying to do
-- Who is it for
-
-Example:
-
-> This model suggests 3 to 5 songs from a small catalog based on a user's preferred genre, mood, and energy level. It is for classroom exploration only, not for real users.
-
----
-
-## 3. How It Works (Short Explanation)
-
-Describe your scoring logic in plain language.
-
-- What features of each song does it consider
-- What information about the user does it use
-- How does it turn those into a number
-
-Try to avoid code in this section, treat it like an explanation to a non programmer.
-
----
-
-## 4. Data
-
-Describe your dataset.
-
-- How many songs are in `data/songs.csv`
-- Did you add or remove any songs
-- What kinds of genres or moods are represented
-- Whose taste does this data mostly reflect
-
----
-
-## 5. Strengths
-
-Where does your recommender work well
-
-You can think about:
-- Situations where the top results "felt right"
-- Particular user profiles it served well
-- Simplicity or transparency benefits
-
----
-
-## 6. Limitations and Bias
-
-Where does your recommender struggle
-
-Some prompts:
-- Does it ignore some genres or moods
-- Does it treat all users as if they have the same taste shape
-- Is it biased toward high energy or one genre by default
-- How could this be unfair if used in a real product
-
----
-
-## 7. Evaluation
-
-How did you check your system
-
-Examples:
-- You tried multiple user profiles and wrote down whether the results matched your expectations
-- You compared your simulation to what a real app like Spotify or YouTube tends to recommend
-- You wrote tests for your scoring logic
-
-You do not need a numeric metric, but if you used one, explain what it measures.
-
----
-
-## 8. Future Work
-
-If you had more time, how would you improve this recommender
-
-Examples:
-
-- Add support for multiple users and "group vibe" recommendations
-- Balance diversity of songs instead of always picking the closest match
-- Use more features, like tempo ranges or lyric themes
-
----
-
-## 9. Personal Reflection
-
-A few sentences about what you learned:
-
-- What surprised you about how your system behaved
-- How did building this change how you think about real music recommenders
-- Where do you think human judgment still matters, even if the model seems "smart"
-
+## Final Reflection 
+- This project taught me how to use AI as a partner and tool, rather than just letting it do the work. Overall with the technology advancement we had in the past years, It is normal for people to nowadays be implementing AI for their work. This project also taught me how to brainstorm strategies with AI, and to overall think like a true AI Engineer! I love working with AI, and it is fascinating how it has improved. I am excited to see what project I build next!
