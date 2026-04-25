@@ -20,6 +20,7 @@
 - After creating an API key, copy it and paste it onto the placeholder in the .env file.
 
 - Shortly after, ensure in the terminal you are in the correct folder to run the program. The folder is called "applied-ai-systems-project".
+- To ensure you are in the correct folder, you can type "cd applied-ai-systems-project".
 
 - Once in the correct folder, run the program with "python -m streamlit run src/app.py".
 - A window should open and the UI should display. Now you can begin use.
@@ -56,3 +57,10 @@ There are pytests conducted in tests/test_rag.py to ensure program features like
 
 ## Final Reflection 
 - This project taught me how to use AI as a partner and tool, rather than just letting it do the work. Overall with the technology advancement we had in the past years, It is normal for people to nowadays be implementing AI for their work. This project also taught me how to brainstorm strategies with AI, and to overall think like a true AI Engineer! I love working with AI, and it is fascinating how it has improved. I am excited to see what project I build next!
+
+## System Walkthrough Video
+
+- Here is video walkthrough demonstration on how my project works!
+
+https://www.loom.com/share/4eee04bb30144f599fbb9d237fd86f1e
+
